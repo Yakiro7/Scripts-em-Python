@@ -1,6 +1,3 @@
-from cgitb import text
-from multiprocessing.sharedctypes import Value
-from turtle import width
 from pytube import YouTube
 import tkinter as tk
 

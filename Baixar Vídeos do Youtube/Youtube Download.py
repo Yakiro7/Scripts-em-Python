@@ -1,12 +1,15 @@
+from time import sleep
 from pytube import YouTube
 import tkinter as tk
-
+    
 opcao = 0
 def opcao1():
     global opcao
+    texto.set('Selecionado Vídeo')
     opcao = 1
 def opcao2():
     global opcao
+    texto.set('Selecionado Música')
     opcao = 2
 
 def teste():
@@ -15,7 +18,8 @@ def teste():
     else:
         print(f"Opção Música {video_url.get()} {opcao}")
 
-def Donwload():    
+def Donwload():
+
     link = video_url.get()
     yt = YouTube(link)
     
@@ -28,12 +32,15 @@ def Donwload():
         musica = yt.streams.filter(only_audio=True)[0]
         musica.download()
     
-    print('Arquivo Baixado com Sucesso')
+
+    texto.set('Conclúido com Sucesso!')  
 
 
 
 janela = tk.Tk()
 v = tk.IntVar()
+texto = tk.StringVar()
+texto.set('Escolha uma opção')
 
 janela.title("Baixar Vídeos e Músicas do Youtube")
 lblTitile = tk.Label(janela, text='Baixar vídeos e Músicas do Youtube')
@@ -45,6 +52,7 @@ btnDownloadM = tk.Radiobutton(janela, text='Música',padx=30, variable=v, value=
 btnSair = tk.Button(janela, text='Sair', command= janela.destroy)
 escolha1 = tk.Checkbutton(janela, text='Vídeo')
 escolha2 = tk.Checkbutton(janela, text="Música")
+lblDownload = tk.Label(janela, textvariable=texto)
 
 
 lblTitile.grid()
@@ -53,7 +61,12 @@ video_url.grid(row=1, column=1, ipadx= 200)
 btnDownloadV.grid(row=2, column=0)
 btnDownloadM.grid(row=3, column=0)
 baixar.grid(row=3, column=1)
+lblDownload.grid(row=3, columns=3)
 btnSair.grid(row=4, column=0)
 
 
 janela.mainloop()
+
+
+#Adicionar escolha entre resoluções
+#verificar velocidade da rede e recomendar uma determinada resolução

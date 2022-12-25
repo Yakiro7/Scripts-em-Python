@@ -10,8 +10,8 @@ class AppBD:
       self.conexao = pg.connect(host='127.0.0.1',
       port='5432',
       user='postgres',
-      password='1234',
-      database='dbestudo')
+      password='123',
+      database='produtos')
       
       print('Conexão realizada com sucesso!')
     except (Exception, pg.Error) as erro:
@@ -39,12 +39,12 @@ class AppBD:
     
     return registros
 
-  def inserir_dados(self, codigo, nome, preco):
+  def inserir_dados(self, codigo, nome, quantidade, preco):
     try:
       self.abrir_conexao()
       cursor = self.conexao.cursor()
-      inserir_query = '''INSERT INTO PRODUTO VALUES (%s, %s, %s);'''
-      inserir_registro = (codigo, nome, preco)
+      inserir_query = '''INSERT INTO PRODUTO VALUES (%s, %s, %s, %s);'''
+      inserir_registro = (codigo, nome, quantidade, preco)
       cursor.execute(inserir_query,inserir_registro)
       self.conexao.commit()
       contagem = cursor.rowcount()
@@ -58,7 +58,7 @@ class AppBD:
         self.conexao.close()
         print('A conexao com o PostgreSQL foi encerrada')
 
-  def atualizar_dados(self, codigo, nome, preco):
+  def atualizar_dados(self, codigo, nome, quantidade, preco):
     try:
       self.abrir_conexao()
       cursor = self.conexao.cursor()
@@ -69,10 +69,10 @@ class AppBD:
       registro = cursor.fetchone()
       print(registro)
 
-      sql_update_query = '''UPDATE PRODUTO SET NOME = %s, PRECO = %s 
+      sql_update_query = '''UPDATE PRODUTO SET NOME = %s, PRECO = %s, QUANTIDADE = %s 
       WHERE CODIGO = %s'''
 
-      cursor.execute(sql_update_query, (nome, preco, codigo))
+      cursor.execute(sql_update_query, (nome, preco, quantidade, codigo))
 
       registro = cursor.fetchone()
       print(registro)

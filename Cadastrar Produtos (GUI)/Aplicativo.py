@@ -46,10 +46,10 @@ class principalBD:
     self.treeProdutos.heading('Quantidade', text='Quantidade')
     self.treeProdutos.heading('Preço', text='Preço')
 
-    self.treeProdutos.column('Código', minwidth=0, width=100)
-    self.treeProdutos.column('Nome', minwidth=0, width=100)
-    self.treeProdutos.column('Quantidade', minwidth=0, width=100)
-    self.treeProdutos.column('Preço', minwidth=0, width=100)
+    self.treeProdutos.column('Código', minwidth=0, width=50)
+    self.treeProdutos.column('Nome', minwidth=0, width=50)
+    self.treeProdutos.column('Quantidade', minwidth=0, width=50)
+    self.treeProdutos.column('Preço', minwidth=0, width=50)
 
     self.treeProdutos.pack(padx=10, pady=10)
     self.treeProdutos.bind('<<TreeviwerSelect>>',

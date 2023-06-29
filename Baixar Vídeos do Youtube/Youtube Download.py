@@ -1,6 +1,7 @@
 from time import sleep
 from pytube import YouTube
 import tkinter as tk
+import os
     
 opcao = 0
 def opcao1():
@@ -29,8 +30,13 @@ def Donwload():
         video.download()
     else:
         print('Você escolheu música')
-        musica = yt.streams.filter(only_audio=True)[0]
-        musica.download()
+        musica = yt.streams.filter(only_audio=True).first()
+        destination = str(input(">> ")) or '.'
+        out_file = musica.download(output_path=destination)
+        base, ext = os.path.splitext(out_file)
+        new_file = base + '.mp3'
+        os.rename(out_file, new_file)
+        print(yt.title + " has been successfully downloaded.")
     
 
     texto.set('Conclúido com Sucesso!')  

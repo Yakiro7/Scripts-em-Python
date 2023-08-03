@@ -30,13 +30,13 @@ texto = tk.StringVar()
 texto.set('...')
 
 labelcaminho = tk.Label(janela, text='Selecione o arquivo: ')
-button_explore = tk.Button(janela, text = "Browse Files", command = browseFiles)  
+button_explore = tk.Button(janela, text = "Carregar Arquivo", command = browseFiles)  
 label_file_explorer = tk.Label(janela, text = "Arguadando o Arquivo!",  fg = "blue")
 converter = tk.Button(janela, text='Clique aqui para converter', command=conversor)
 
 labelcaminho.place(x=120, y=20)
 label_file_explorer.place(x=120, y=60)
-button_explore.place(x=140, y=100)
+button_explore.place(x=125, y=100)
 converter.place(x=100, y=150)
 
 janela.geometry('350x300')

@@ -1,8 +1,11 @@
 from time import sleep
-from pytube import YouTube
+from pytube import YouTube #pip install pytube
 import tkinter as tk
 import os
-    
+import moviepy.editor as mp #pip install moviepy
+from tkinter import filedialog #Pretendo aadicionar uma aseleção de pasta para salvar o arquivo
+
+#Criando a opção de escolha entre vídeo e música
 opcao = 0
 def opcao1():
     global opcao
@@ -13,6 +16,7 @@ def opcao2():
     texto.set('Selecionado Música')
     opcao = 2
 
+
 def teste():
     if opcao == 1:
         print(f"Opção vídeo {video_url.get()} {opcao}")
@@ -20,29 +24,38 @@ def teste():
         print(f"Opção Música {video_url.get()} {opcao}")
 
 def Donwload():
-
+    #Função para pegar a URL que foi colocada no "Entry"
     link = video_url.get()
     yt = YouTube(link)
     
     if opcao == 1:
+        #Download do Vídeo
         print('Você escolheu vídeo')
         video = yt.streams.get_highest_resolution()
+        titulo = yt.title
+        print(titulo)
         video.download()
     else:
+        #Download o Audio
         print('Você escolheu música')
-        musica = yt.streams.filter(only_audio=True).first()
-        destination = str(input(">> ")) or '.'
-        out_file = musica.download(output_path=destination)
-        base, ext = os.path.splitext(out_file)
-        new_file = base + '.mp3'
-        os.rename(out_file, new_file)
-        print(yt.title + " has been successfully downloaded.")
-    
+        musica = yt.streams.get_highest_resolution()
+        titulo = yt.title
+        print(titulo)
+        musica.download()
+        #Correção de Titulo
+        chars = "'.,!'"
+        titulo = titulo.translate(str.maketrans('', '', chars))
+        #Conversor para MP3
+        mp4 = f'{titulo}.mp4'
+        mp3 = f'{titulo}.mp3'
+        clip = mp.VideoFileClip(mp4).subclip()
+        clip.audio.write_audiofile(mp3)
+        
+    texto.set('Conclúido com Sucesso!')
+    os.remove(mp4) #Ainda com problemas
 
-    texto.set('Conclúido com Sucesso!')  
 
-
-
+#Criação da interface Gráfica
 janela = tk.Tk()
 v = tk.IntVar()
 texto = tk.StringVar()

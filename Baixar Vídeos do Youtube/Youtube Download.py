@@ -4,7 +4,7 @@ import tkinter as tk
 import os
 import moviepy.editor as mp #pip install moviepy
 from tkinter import filedialog #Pretendo aadicionar uma aseleção de pasta para salvar o arquivo
-
+import webbrowser
 #Criando a opção de escolha entre vídeo e música
 opcao = 0
 def opcao1():
@@ -43,7 +43,7 @@ def Donwload():
         print(titulo)
         musica.download()
         #Correção de Titulo
-        chars = "'.,!'"
+        chars = "'.,!{「」|}'|-|/"
         titulo = titulo.translate(str.maketrans('', '', chars))
         #Conversor para MP3
         mp4 = f'{titulo}.mp4'
@@ -52,8 +52,10 @@ def Donwload():
         clip.audio.write_audiofile(mp3)
         
     texto.set('Conclúido com Sucesso!')
-    os.remove(mp4) #Ainda com problemas
-
+    #os.remove(mp4) Ainda com problemas
+    
+def info():
+    webbrowser.open('https://yurilealdacruz.github.io')
 
 #Criação da interface Gráfica
 janela = tk.Tk()
@@ -72,6 +74,7 @@ btnSair = tk.Button(janela, text='Sair', command= janela.destroy)
 escolha1 = tk.Checkbutton(janela, text='Vídeo')
 escolha2 = tk.Checkbutton(janela, text="Música")
 lblDownload = tk.Label(janela, textvariable=texto)
+btninfo = tk.Button(janela, text='Info', command=info)
 
 
 lblTitile.grid()
@@ -82,6 +85,7 @@ btnDownloadM.grid(row=3, column=0)
 baixar.grid(row=3, column=1)
 lblDownload.grid(row=3, columns=3)
 btnSair.grid(row=4, column=0)
+btninfo.grid(row=4, column=3)
 
 
 janela.mainloop()

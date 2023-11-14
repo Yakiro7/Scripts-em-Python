@@ -9,22 +9,21 @@ from mysql.connector import errorcode
 
 def vizualizar():
 
-    def item_selected(event):
-        for selected_item in tree.selection():
-            item = tree.item(selected_item)
-            record = item['values']
-
 
     def deletar():
-        sql_delete = 'DELETE FROM ESTOQUE WHERE ID = %s'
+        sql_delete = '''DELETE FROM ESTOQUE WHERE ID = %s'''
         valor_para_deletar = deletar_entry.get()
-        valor_para_deletar = int(valor_para_deletar)
-        cursor.execute(sql_delete, valor_para_deletar)
+        cursor.execute(sql_delete, (valor_para_deletar,))
         db_connection.commit()
         print(f'Registro com o ID {sql_delete} foi deletado com sucesso!')
 
     #alterar dados do registro
     def item_selected(event):
+        for selected_item in tree.selection():
+            item = tree.item(selected_item)
+            record = item['values']
+        print(record)
+
         janela2 = ctk.CTk()
 
         janela2.title('Alterar dados do registro')
@@ -45,7 +44,7 @@ def vizualizar():
             conexao = "Usário ou Senha está errada!"
         else:
             conexao = error
-        
+    print(conexao)
     sql_select_query = '''SELECT * FROM ESTOQUE'''
     cursor.execute(sql_select_query)
     registros = cursor.fetchall()

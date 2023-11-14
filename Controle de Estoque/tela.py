@@ -5,6 +5,9 @@ def tela():
     def cadastrar_item():
         import cadastrar1
         return cadastrar1.cadastrarr()
+    def vizualizar():
+        import vizualizar1
+        return vizualizar1.vizualizar()
     #def cadastrar_item2():
         #import cadastrar2
         #return cadastrar2.cadastrarr()
@@ -23,7 +26,7 @@ def tela():
 
 
     botaoCadastro = ctk.CTkButton(janela, text="Cadastrar", command=cadastrar_item)
-    botaoAtualizar = ctk.CTkButton(janela, text="Vizualizar / Atualizar")
+    botaoAtualizar = ctk.CTkButton(janela, text="Vizualizar / Atualizar", command=vizualizar)
     #botaoVizualizar = ctk.CTkButton(janela, text="Vizualizar")
 
     #botao1Cadastro = ctk.CTkButton(janela, text="Cadastrar", command=cadastrar_item2)
@@ -49,4 +52,3 @@ def tela():
     janela.geometry("350x190")
     janela.resizable(0,0)
     janela.mainloop()
-

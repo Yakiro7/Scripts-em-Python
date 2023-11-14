@@ -1,0 +1,1 @@
+print('Selecionando todos os produtos')
